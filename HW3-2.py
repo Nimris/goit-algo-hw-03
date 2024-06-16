@@ -1,40 +1,46 @@
 import random
-import re
 
-def get_numbers_ticket(min = 1, max = 999, quantity = 5):
+def get_numbers_ticket(min = 1, max = 1000, quantity = 10):
     
     try:
-        #Отримуємо данні від користувача та розпаковуємо в мін, макс, кількість
-            #pattern = r"[#@;!]"
-            #fruits = re.split(pattern, text)
-        min, max, quantity = input("Min, max, quantity: ").split(",") 
+        #Отримуємо данні від користувача та робимо список
+        user_input = input("Min, max, quantity: ").split(",")
     
         #Переводимо в int
-        min = int(min)
-        max = int(max)
-        quantity = int(quantity)
+        min, max, quantity = map(int, user_input)
         
         # Перевіряємо відповідність параметрів
-        if min >= 1 and max <= 1000 and (min < quantity < max):
-            
-            #Додаємо рандомні числа в список numbers
-            numbers = []
-            for i in range(quantity):
-                numbers.append(random.randrange(min, max)) 
-                
-            #Сортуємо та видаляємо повторні значення
-            unique_numbers = list(set(numbers))
-            unique_numbers.sort()
-
-            print(unique_numbers)
-            return unique_numbers
-    
-        else:
-            print("Invalid value")
-            return []
+        if max > 1000:
+            print("Max value is 1000")
+            get_numbers_ticket()
         
+        if quantity < min or quantity > max:
+            print("Quantity value is incorrect")
+            get_numbers_ticket()
+            
+        if min >= 1 and max <= 1000 and (1 <= quantity <= max):
+            
+            #Додаємо рандомні числа в множину numbers
+            numbers = set()
+            while len(numbers) < quantity:
+                numbers.add(random.randrange(min, max)) 
+                
+            #перетворюємо в список та сортуємо
+            unsorted_list = list(numbers)
+            sorted_list = sorted(unsorted_list)
+            
+            print(sorted_list)
+            return sorted_list
+        
+        else:
+            print("Enter 3 numbers in format '1, 999, 10'")
+            get_numbers_ticket()
+    
     except:
-        print("Try again")
-        return []
+        print("Enter 3 numbers in format '1, 999, 10'")
+        get_numbers_ticket()
+    
+    finally:
+        print("* " *10)
     
 get_numbers_ticket()
