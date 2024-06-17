@@ -1,12 +1,10 @@
 import re
 
-def phone_number() -> str:
-    
-    unformated_number = input("Your number: ")
+def normalize_phone(num) -> str:
     
     #Видаляємо все крім плюса та цифр
     pattern = r"[^\d+]"
-    formated_number = re.sub(pattern, "", unformated_number)
+    formated_number = re.sub(pattern, "", num)
     
     #Додаємо +38
     if not formated_number.startswith("+38"):
@@ -17,7 +15,20 @@ def phone_number() -> str:
     else:
         final_number = formated_number
         
-    print(final_number)
     return final_number
     
-phone_number()
+    #перевіряємо
+raw_numbers = [
+    "067\\t123 4567",
+    "(095) 234-5678\\n",
+    "+380 44 123 4567",
+    "380501234567",
+    "    +38(050)123-32-34",
+    "     0503451234",
+    "(050)8889900",
+    "38050-111-22-22",
+    "3 8050 111 22 11  ",
+]
+
+sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
+print("Нормалізовані номери телефонів для SMS-розсилки:", sanitized_numbers)
