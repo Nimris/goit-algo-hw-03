@@ -5,8 +5,13 @@ def get_days_from_today():
     date = input("Write date in a format 'YYYY-MM-DD': ")                
     
     try:
+        #Переводимо рядок в дату        
         d_obj = datetime.strptime(date, "%Y-%m-%d").date()
+        
+        #Визначаємо сьогоднішню дату
         now = datetime.today().date()
+        
+        #Визначаємо різницю
         result = (d_obj - now).days
         
         print(f"Your date: {d_obj}")
