@@ -1,3 +1,5 @@
+#Підрахунок кількості дней від сьогодні до певної дати
+
 from datetime import datetime
 
 def get_days_from_today():

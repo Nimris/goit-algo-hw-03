@@ -1,3 +1,5 @@
+#Генерація випадкових чисел
+
 import random
 
 def get_numbers_ticket(min = 1, max = 1000, quantity = 10):
